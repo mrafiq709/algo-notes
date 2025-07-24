@@ -26,7 +26,7 @@ export default function Home() {
 			<h1 className="text-2xl font-bold">📘 Algorithm Notes</h1>
 			<div className="grid grid-cols-12">
 				{/* Sidebar */}
-				<div className="col-span-2 bg-grey-100">
+				<div className="col-span-2 bg-gray-100 p-4">
 					<ul className="space-y-2">
 						{posts.map((post) => (
 							<li key={post.slug}>

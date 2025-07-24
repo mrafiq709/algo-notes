@@ -22,12 +22,15 @@ export default function PostPage() {
 	}, [slug]);
 
 	return (
-		<div className="markdown-body p-4">
-			<ReactMarkdown
-				children={content}
-				remarkPlugins={[remarkGfm]}
-				rehypePlugins={[rehypeHighlight]}
-			/>
+		<div className="bg-white text-black dark:bg-gray-900 dark:text-white min-h-screen">
+			<div className="markdown-body p-4">
+				<ReactMarkdown
+					remarkPlugins={[remarkGfm]}
+					rehypePlugins={[rehypeHighlight]}
+				>
+					{content}
+				</ReactMarkdown>
+			</div>
 		</div>
 	);
 }

@@ -89,7 +89,7 @@ export default function Home() {
 					</ul>
 				</div>
 				{/* Main Content */}
-				<div className="col-span-10 overflow-y-auto max-h-screen">
+				<div className="col-span-10 max-h-screen">
 					{filteredPosts.map((post) => (
 						<div
 							key={post.slug}

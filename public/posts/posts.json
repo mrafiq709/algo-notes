@@ -1,4 +1,6 @@
 [
 	{ "title": "C++ Template", "slug": "cplus-template" },
-	{ "title": "Binary Search", "slug": "binary-search" }
+	{ "title": "Precision", "slug": "precision" },
+	{ "title": "Bitwise Operator", "slug": "bitwise-operator" },
+	{ "title": "Sorting", "slug": "sorting" }
 ]

@@ -7,6 +7,7 @@ import "highlight.js/styles/github.css";
 export default function Home() {
 	const [posts, setPosts] = useState([]);
 	const [postContent, setPostContent] = useState({});
+	const [searchQuery, setSearchQuery] = useState("");
 
 	useEffect(() => {
 		// Fetch the list of posts
@@ -45,14 +46,37 @@ export default function Home() {
 		}
 	};
 
+	// Filter posts based on the search query in the main content
+	const filteredPosts = posts.filter((post) => {
+		const content = postContent[post.slug] || "";
+		return (
+			post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			content.toLowerCase().includes(searchQuery.toLowerCase())
+		);
+	});
+
 	return (
-		<div className="grid grid-cols-1 bg-white text-black dark:bg-gray-900 dark:text-white p-4 min-h-screen">
-			<h1 className="text-2xl font-bold">📘 Algorithm Notes</h1>
+		<div className="grid grid-cols-1 bg-white text-black dark:bg-gray-900 dark:text-white min-h-screen">
+			{/* Top Navigation Bar */}
+			<div className="flex items-center justify-between bg-gray-100 p-4 shadow-md">
+				{/* Left: Title */}
+				<h1 className="text-xl font-bold">📘 Algorithm Notes</h1>
+
+				{/* Middle: Search Bar */}
+				<input
+					type="text"
+					placeholder="Search posts..."
+					value={searchQuery}
+					onChange={(e) => setSearchQuery(e.target.value)}
+					className="w-1/2 p-2 border border-gray-300 rounded"
+				/>
+			</div>
+
 			<div className="grid grid-cols-12">
 				{/* Sidebar */}
 				<div className="col-span-2 bg-gray-100 p-4">
 					<ul className="space-y-2">
-						{posts.map((post) => (
+						{filteredPosts.map((post) => (
 							<li key={post.slug}>
 								<button
 									onClick={() => scrollToPost(post.slug)}
@@ -66,7 +90,7 @@ export default function Home() {
 				</div>
 				{/* Main Content */}
 				<div className="col-span-10 overflow-y-auto max-h-screen">
-					{posts.map((post) => (
+					{filteredPosts.map((post) => (
 						<div
 							key={post.slug}
 							id={post.slug}

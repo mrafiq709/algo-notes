@@ -1,6 +1,5 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import PostPage from "./pages/PostPage";
 import DarkModeToggle from "./components/DarkModeToggle";
 
 function App() {
@@ -8,9 +7,7 @@ function App() {
 		<HashRouter>
 			<DarkModeToggle />
 			<Routes>
-				<Route path="/" element={<Home />}>
-					<Route path="/posts/:slug" element={<PostPage />} />
-				</Route>
+				<Route path="/" element={<Home />} />
 			</Routes>
 		</HashRouter>
 	);

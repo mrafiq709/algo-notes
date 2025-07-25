@@ -1,25 +1,49 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github.css";
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
-	const navigate = useNavigate();
+	const [postContent, setPostContent] = useState({});
 
 	useEffect(() => {
+		// Fetch the list of posts
 		fetch("/algo-notes/posts/posts.json")
 			.then((res) => res.json())
-			.then((data) => setPosts(data))
+			.then((data) => {
+				setPosts(data);
+
+				// Fetch content for each post
+				data.forEach((post) => {
+					fetch(`/algo-notes/posts/${post.slug}.md`)
+						.then((res) => res.text())
+						.then((content) => {
+							setPostContent((prev) => ({
+								...prev,
+								[post.slug]: content,
+							}));
+						})
+						.catch((err) => {
+							console.error(
+								`Failed to load ${post.slug}.md`,
+								err
+							);
+						});
+				});
+			})
 			.catch((err) => {
 				console.error("Failed to load posts.json", err);
 			});
 	}, []);
 
-	// Redirect to the first post on initial load
-	useEffect(() => {
-		if (posts.length > 0) {
-			navigate(`/posts/${posts[0].slug}`);
+	const scrollToPost = (slug) => {
+		const postElement = document.getElementById(slug);
+		if (postElement) {
+			postElement.scrollIntoView({ behavior: "smooth" });
 		}
-	}, [posts]);
+	};
 
 	return (
 		<div className="grid grid-cols-1 bg-white text-black dark:bg-gray-900 dark:text-white p-4 min-h-screen">
@@ -30,19 +54,35 @@ export default function Home() {
 					<ul className="space-y-2">
 						{posts.map((post) => (
 							<li key={post.slug}>
-								<Link
-									to={`/posts/${post.slug}`}
+								<button
+									onClick={() => scrollToPost(post.slug)}
 									className="text-blue-500 hover:underline"
 								>
 									{post.title}
-								</Link>
+								</button>
 							</li>
 						))}
 					</ul>
 				</div>
 				{/* Main Content */}
-				<div className="col-span-10">
-					<Outlet />
+				<div className="col-span-10 overflow-y-auto max-h-screen">
+					{posts.map((post) => (
+						<div
+							key={post.slug}
+							id={post.slug}
+							className="markdown-body p-4 border-b border-gray-300"
+						>
+							<h2 className="text-xl font-semibold">
+								{post.title}
+							</h2>
+							<ReactMarkdown
+								remarkPlugins={[remarkGfm]}
+								rehypePlugins={[rehypeHighlight]}
+							>
+								{postContent[post.slug] || "Loading..."}
+							</ReactMarkdown>
+						</div>
+					))}
 				</div>
 			</div>
 		</div>

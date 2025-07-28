@@ -9,12 +9,11 @@ sort(v.begin(), v.end(), [](const int a, const int b) {return a > b; });
 auto it = find(v.begin(), v.end(), value);
 int index = it - v.begin();
 // Declaring and initializing 2d vector
-/*
-vector<vector<int>> v = {{1, 2}, {3, 4}};
+vector<vector<int>> v = {{1, 2}, {3, 4}}; // Escape {{ and }}
 for (int i = 0; i < v.size(); i++)
-        for (int j = 0; j < v[i].size(); j++)
-            	cout << v[i][j] << " ";
-*/
+    for (int j = 0; j < v[i].size(); j++)
+        cout << v[i][j] << " ";
+
 vector<string> words = {"banana", "apple", "cherry", "date"};
 sort(words.begin(), words.end());
 for (const auto& word : words) {

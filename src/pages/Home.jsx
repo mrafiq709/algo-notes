@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -58,17 +59,30 @@ export default function Home() {
 	return (
 		<div className="grid grid-cols-1 bg-white text-black dark:bg-gray-900 dark:text-white min-h-screen">
 			{/* Top Navigation Bar */}
-			<div className="flex items-center justify-between bg-gray-100 p-4 shadow-md">
-				{/* Left: Title */}
-				<h1 className="text-xl font-bold">📘 Algorithm Notes</h1>
+			<div className="flex items-center justify-between bg-gray-600 text-white p-4 shadow-md">
+				<div className="flex items-center space-x-6">
+					<h1 className="text-xl font-bold">📘 Algorithm Notes</h1>
+					<Link
+						to="/"
+						className="hover:text-gray-300 transition duration-200"
+					>
+						C++
+					</Link>
+					<Link
+						to="/java"
+						className="hover:text-gray-300 transition duration-200"
+					>
+						Java
+					</Link>
+				</div>
 
-				{/* Middle: Search Bar */}
+				{/* Right: Search Bar */}
 				<input
 					type="text"
 					placeholder="Search posts..."
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
-					className="w-1/2 p-2 border border-gray-300 rounded"
+					className="w-1/3 p-2 border border-gray-300 rounded text-black"
 				/>
 			</div>
 
@@ -89,7 +103,7 @@ export default function Home() {
 					</ul>
 				</div>
 				{/* Main Content */}
-				<div className="col-span-10 max-h-screen">
+				<div className="col-span-10 overflow-y-auto max-h-screen">
 					{filteredPosts.map((post) => (
 						<div
 							key={post.slug}

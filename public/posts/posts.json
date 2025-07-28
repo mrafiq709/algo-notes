@@ -2,5 +2,13 @@
 	{ "title": "C++ Template", "slug": "cplus-template" },
 	{ "title": "Precision", "slug": "precision" },
 	{ "title": "Bitwise Operator", "slug": "bitwise-operator" },
-	{ "title": "Sorting", "slug": "sorting" }
+	{ "title": "Sorting", "slug": "sorting" },
+	{ "title": "Map", "slug": "map" },
+	{ "title": "String", "slug": "string" },
+	{ "title": "Vector", "slug": "vector" },
+	{ "title": "Number Theory", "slug": "number-theory" },
+	{ "title": "Set", "slug": "set" },
+	{ "title": "Graph", "slug": "graph" },
+	{ "title": "Permutation", "slug": "permutation" },
+	{ "title": "Fenwick Tree", "slug": "fenwick-tree" }
 ]

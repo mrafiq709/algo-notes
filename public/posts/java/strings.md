@@ -23,3 +23,21 @@ StringBuffer sb = new StringBuffer("Hello");
 sb.append(" World");
 System.out.println(sb);
 ```
+##### Reverse a String
+```java
+String str = "Java";
+String reversed = new StringBuilder(str).reverse().toString();
+System.out.println(reversed);
+```
+##### Find Duplicate Elements in Array
+```java
+int[] arr = {1,2,3,2,4,1};
+
+Set<Integer> set = new HashSet<>();
+
+for(int num : arr) {
+    if(!set.add(num)) {
+        System.out.println(num);
+    }
+}
+```

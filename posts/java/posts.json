@@ -1,0 +1,8 @@
+[
+    {"title": "Sealed Class", "slug": "sealed-class"},
+    {"title": "Records", "slug": "records"},
+    {"title": "Text blocks", "slug": "text-block"},
+    {"title": "Garbage Collection", "slug": "garbage-collection"},
+    {"title": "Threads", "slug": "threads"},
+    {"title": "Strings", "slug": "strings"}
+]
